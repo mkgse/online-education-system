@@ -1,0 +1,258 @@
+{% extends 'edu/base1.html' %}
+{% load static %}
+
+{% block content %} 
+
+
+
+<script type="text/javascript" 
+        src="https://code.jquery.com/jquery-1.12.4.js">
+    </script>
+    <script type="text/javascript" src=
+        "https://code.jquery.com/ui/1.12.1/jquery-ui.js">
+    </script>
+    <link type="text/css" href=
+    "https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+            rel="stylesheet" />
+   
+    
+            <script>
+                $(document).ready(function() {
+                    $("#txtDate").datepicker({dateFormat:'mm/dd/yy',
+                    changeMonth:true,
+                    changeYear:true,
+                    yearRange:"1980:2015"
+                });
+                    
+                     
+                });
+            </script>        
+
+<style>
+label {
+  padding-left: 5px;
+  font-family:Arial, Helvetica, sans-serif
+}
+
+</style>
+
+
+<div class="container mt-4 my-4">
+   
+<form action="" method="POST" enctype="multipart/form-data" class="shadow">   
+ 
+{% csrf_token %}
+  
+  <h2 class="text-center alert-secondary">Admission Form</h2>
+
+   <div class="row mt-1 p-3 ">
+    <h4>Persional form</h4>  
+ 
+
+    <hr>
+    <div class="col-sm-4">
+        <label for="id_firstname">First Name:</label>
+        {{form.firstname}}
+        
+    </div>
+    <div class="col-sm-4">
+    <label for="id_middlename">Middle  Name:</label>
+        {{form.middlename}}
+    </div>
+    <div class="col-sm-4">
+        <label for="id_lastname">Last Name:</label>
+        {{form.lastname}}
+    </div> 
+    
+  
+
+    <div class="col-sm-4">
+        <label for="id_fathername">Father Name:</label>
+        {{form.fathername}}
+    </div>
+    <div class="col-sm-4">
+    <label for="id_mothername">Mother Name:</label>
+        {{form.mothername}}
+    </div>
+    <div class="col-sm-4">
+ 
+        <label for="id_dob" class="col-sm-4">Date of Birth:</label>
+        {{form.dob}}
+    </div>   
+    <div class="col-sm-4 mt-4">
+        <label for="id_gender">Gender:</label>
+        {{form.gender}}
+    </div>
+    <div class="col-sm-4">
+    <label for="id_mobile">Mobile:</label>
+        {{form.mobile}}
+    </div>
+    <div class="col-sm-4">
+        <label for="id_email">Email:</label>
+        {{form.email}}
+    </div> 
+    
+ 
+
+    <div class="col-sm-6">
+        <label for="id_address">Address:</label>
+        {{form.address}}
+    </div>
+    <div class="col-sm-6">
+    <label for="id_city">City:</label>
+        {{form.city}}
+    </div>
+
+
+    <div class="col-sm-6">
+        <label for="id_state">State:</label>
+        {{form.state}}
+    </div>
+    <div class="col-sm-6">
+    <label for="id_pin">Pin Code:</label>
+        {{form.pin}}
+    </div>
+    
+
+</div>  
+
+<div class="row p-3">
+    <h4>Educational form</h4>
+    <hr>
+    <div class="col-sm-1 text-center">
+     <p>S.N.</p>
+     <p>1.</p>
+     <br>
+     <p>2.</p>
+     <p>3.</p>
+    </div>
+    <div class="col-sm-3 text-center">
+        <p>Examination</p>
+        <p>Class X</p>
+        <br>
+        <p>Class XII</p>
+        <p>Graduation</p>
+    </div>
+    <div class="col-sm-2 text-center">
+        <p>Board</p>
+        <p>{{form.board}}</p>
+        <p>{{form.board1}}</p>
+        <p>{{form.board2}}</p>  
+    </div>
+    <div class="col-sm-2 text-center">
+        <p>Passing Year</p>
+        <p>{{form.passing_year}}</p>
+        <p>{{form.passing_year1}}</p>
+        <p>{{form.passing_year2}}</p>  
+        
+    </div>
+    <div class="col-sm-2 text-center">
+        <p>Percentage</p>
+        <p>{{form.percentage}}</p>
+        <p>{{form.percentage1}}</p>
+        <p>{{form.percentage2}}</p>  
+    </div>
+    <div class="col-sm-2 text-center">
+        <p>Roll No.</p>
+        <p>{{form.roll_number}}</p>
+        <p>{{form.roll_number1}}</p>
+        <p>{{form.roll_number2}}</p>  
+    </div>
+   
+
+    
+</div>
+<div class="row p-3">
+<h4>Document form</h4>
+<hr>
+    <div class="col-sm-6 text-center">
+        <label for="id_photo">Photo</label>
+       {{form.photo}}
+
+    </div>
+    <div class="col-sm-6 text-center">
+        <label for="id_signature">Signature</label>
+       {{form.signature}}
+
+    </div>
+</div>
+<div class="row mt-4 p-3">
+    <div class="col-sm-6 text-center">
+        <label for="id_matriculation">Matriculation</label>
+       {{form.matriculation}}
+
+    </div>
+    <div class="col-sm-6 text-center">
+        <label for="id_intermediate">Intermediate</label>
+       {{form.intermediate}}
+        
+    </div>
+</div>
+<div class="row mt-3 p-3">
+    <div class="col-sm-6 text-center">
+        <label for="id_graduation">Graduation</label>
+        {{form.graducation}}
+
+    </div>
+
+    <div class="col-sm-6 text-center ">
+        <label for="id_signature">Post Graduation</label>
+        {{form.postgraducation}}
+
+    </div>
+</div> 
+
+<div class="row mt-3 p-3">
+    <div class="col-sm-6 text-center">
+        <label for="id_address_proof">Address Proof</label>
+        {{form.address_proof}}
+
+    </div>
+
+</div> 
+
+
+<div class="row mt-1 p-3">
+    <h4>Course form</h4>
+    <hr class="">
+    <div class="col-sm-10 p-4">
+        <label for="id_photo">Course Applied For</label>
+       {{form.course_applied_for}}
+
+    </div>
+
+    </div>
+ 
+
+
+ {% for st in form %}
+     <div>
+      <small class="text-danger">{{st.errors|striptags}}</small>
+     </div>
+  {% endfor %}
+ 
+   <div class="text-center mt-3">
+      <button type="submit" class="btn btn-success">Update</button>
+      <a href="{% url 'formpreview' pk=form.instance.pk %}" class="btn btn-secondary">Cancel</a>
+    </div>
+  
+  </form>
+</div>
+
+  <div class="col-sm-4 offset-4">
+    {% if messages %}
+     {% for message in messages %}
+     <span {% if message.tags %} class="alert-{{message.tags}}" {% endif %}><script>alert('{{message}}')</script></span>
+    {% endfor %}
+    {% endif %} 
+   
+    
+    </div>
+    </div>
+</div>
+
+  
+
+ 
+
+{% endblock content %}

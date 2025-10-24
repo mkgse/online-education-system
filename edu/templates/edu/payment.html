@@ -16,13 +16,7 @@
   </form>  
 </div> 
         
-          {% if form.non_field_errors %}
-            {% for error in form.non_field_errors %}
-            <p class="alert alert-danger my-3">{{error}}</p>
-            {% endfor %}
-          {% endif %}
-      
-    
+               
         </div>
     
     </div>
@@ -38,15 +32,16 @@
 </div>
 {% if payment %}
 <div class="text-center">
-<form action="/edu/success" method="POST">
+<form action="{% url 'success' %}" method="POST">
+  {% csrf_token %}
  <script src="https://checkout.razorpay.com/v1/checkout.js"
  data-key = "rzp_test_ugBbbb0MY8YfMB"
- data-amount = "{{payment.amount}}"
+ data-amount = "{{order.amount}}"
  data-currency = "INR"
- data-order_id = "{{payment.id}}"
+ data-order_id = "{{order.id}}"
  data-buttontext = "Pay with Razorpay"
- data-name = "Cofee Corp"
- data-description = "Test transaction"
+ data-name = "Course Payment"
+ data-description = "Course Payment"
  data-image = "https://example.com/your_logo"
  data-prefill.name="Gaurav Kumar"
  data.prefill.email = "gaurav.kumar@example.com"

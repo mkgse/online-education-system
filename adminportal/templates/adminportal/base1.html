@@ -1,164 +1,129 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Anushka Enterprises</title>
-   
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-   
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">       
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anushka Enterprises</title>
 
-    
-    {% block css %}
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    {% endblock css %}
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 
-   </head>
-<body>
-    
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    footer {
+      margin-top: auto;
+    }
+
+    footer a {
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+
+  {% block css %}
+  {% endblock css %}
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+  <!-- Navbar -->
   {% include 'adminportal/navbar1.html' %}
-      {% block content %}
-      
-        
-      {% endblock content %}
 
+  <!-- Content Blocks -->
+  <main class="flex-grow-1">
+    {% block content %}{% endblock content %}
+    {% block content1 %}{% endblock content1 %}
+    {% block content2 %}{% endblock content2 %}
+    {% block content3 %}{% endblock content3 %}
+  </main>
 
-      
-      {% block content1 %}
+  <!-- Footer -->
+  <footer class="text-center text-lg-start bg-primary text-white mt-auto">
+    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+      <div class="me-5 d-none d-lg-block">
+        <span>Get connected with us on social networks:</span>
+      </div>
+      <div>
+        <a href="#" class="me-4 text-reset"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="me-4 text-reset"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="me-4 text-reset"><i class="fab fa-google"></i></a>
+        <a href="#" class="me-4 text-reset"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="me-4 text-reset"><i class="fab fa-linkedin"></i></a>
+        <a href="#" class="me-4 text-reset"><i class="fab fa-github"></i></a>
+      </div>
+    </section>
 
-        
-      {% endblock content1 %}
-
-      {% block content2 %}
-
-      {% endblock content2 %}
-
-      {% block content3 %}
-
-      {% endblock content3 %}
-
-    {% block jscontent %}
-    <script src="{% static 'edu/js/jquery.js'%}"></script>
-    <script src="{% static 'edu/js/popper.js'%}"></script>
-    <script src="{% static 'edu/js/bootstrap.js'%}"></script>
-    {% endblock jscontent %}
-    <footer class="text-center text-lg-start bg-primary text-white">
-      <!-- Section: Social media -->
-      <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-        <!-- Left -->
-        <div class="me-5 d-none d-lg-block">
-          <span>Get connected with us on social networks:</span>
-        </div>
-        <!-- Left -->
-    
-        <!-- Right -->
-        <div>
-          <a href="" class="me-4 text-reset">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="" class="me-4 text-reset">
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a href="" class="me-4 text-reset">
-            <i class="fab fa-google"></i>
-          </a>
-          <a href="" class="me-4 text-reset">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="" class="me-4 text-reset">
-            <i class="fab fa-linkedin"></i>
-          </a>
-          <a href="" class="me-4 text-reset">
-            <i class="fab fa-github"></i>
-          </a>
-        </div>
-        <!-- Right -->
-      </section>
-      <!-- Section: Social media -->
-    
-      <!-- Section: Links  -->
-      <section class="">
-        <div class="container text-center text-md-start mt-5">
-          <!-- Grid row -->
-          <div class="row mt-3">
-            <!-- Grid column -->
-            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-              <!-- Content -->
-              <h6 class="text-uppercase fw-bold mb-4">
-                <i class="fas fa-gem me-3"></i>ABM Enterprises
-              </h6>
-              <p>
-                It is multipurpose product base company .They Sell and Purchase Product  Online & Offline Plateform.
-              </p>
-            </div>
-            <!-- Grid column -->
-    
-            <!-- Grid column -->
-            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-              <!-- Links -->
-              <h6 class="text-uppercase fw-bold mb-4">
-                Products
-              </h6>
-              <p>
-                <a href="#!" class="text-reset">Education</a>
-              </p>
-              <p>
-                <a href="#!" class="text-reset">Computer</a>
-              </p>
-              <p>
-                <a href="#!" class="text-reset">Software</a>
-              </p>
-              <p>
-                <a href="#!" class="text-reset">Computer Hardware</a>
-              </p>
-            </div>
-            <!-- Grid column -->
-    
-            <!-- Grid column -->
-            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-              <!-- Links -->
-              <h6 class="text-uppercase fw-bold mb-4">
-                Useful links
-              </h6>
-              <p>
-                <a href="#!" class="text-reset">Education</a>
-              </p>
-              <p>
-                <a href="#!" class="text-reset">Online Shopping</a>
-              </p>
-              <p>
-                <a href="#!" class="text-reset">Blog</a>
-              </p>
-              <p>
-                <a href="#!" class="text-reset">Help</a>
-              </p>
-            </div>
-            <!-- Grid column -->
-    
-            <!-- Grid column -->
-            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-              <!-- Links -->
-              <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-              <p><i class="fas fa-home me-3"></i>D-2/2 Near Hanuman Mandir,
-                 Shahbad Dairy, Delhi 42</p>
-              <p>
-                <i class="fas fa-envelope me-3"></i>
-                costumerservices20@gmail.com
-              </p>
-              <p><i class="fas fa-phone me-3"></i> + 91 9599 0487 24</p>
-              <p><i class="fas fa-phone me-3"></i> + 91 9315 4343 58</p>
-            </div>
-            <!-- Grid column -->
+    <section>
+      <div class="container text-center text-md-start mt-4">
+        <div class="row">
+          <div class="col-md-3 col-lg-4 col-xl-3 mb-4">
+            <h6 class="text-uppercase fw-bold mb-3">
+              <i class="fas fa-gem me-2"></i>Rotary Computer Education Center
+            </h6>
+            <p>
+              Rotary Computer Education Center is a Computer Training Institute. Our certification is valid across India. 
+              We are a large-scale learning community.
+            </p>
           </div>
-          <!-- Grid row -->
+
+          <div class="col-md-2 col-lg-2 col-xl-2 mb-4">
+            <h6 class="text-uppercase fw-bold mb-3">Products</h6>
+            <p><a href="#!" class="text-reset">Computer Training</a></p>
+            <p><a href="#!" class="text-reset">Coaching</a></p>
+            <p><a href="#!" class="text-reset">English Speaking</a></p>
+            <p><a href="#!" class="text-reset">Soft Skills</a></p>
+          </div>
+
+          <div class="col-md-3 col-lg-2 col-xl-2 mb-4">
+            <h6 class="text-uppercase fw-bold mb-3">Useful links</h6>
+            <p><a href="#!" class="text-reset">Education</a></p>
+            <p><a href="#!" class="text-reset">Business</a></p>
+            <p><a href="#!" class="text-reset">Online Shopping</a></p>
+            <p><a href="#!" class="text-reset">Blog</a></p>
+          </div>
+
+          <div class="col-md-4 col-lg-3 col-xl-3 mb-md-0 mb-4">
+            <h6 class="text-uppercase fw-bold mb-3">Contact</h6>
+            <p><i class="fas fa-home me-2"></i>D-2/2 Near Hanuman Mandir Shahbad Dairy, Delhi-110042</p>
+            <p><i class="fas fa-envelope me-2"></i>costumerservices20@gmail.com</p>
+            <p><i class="fas fa-phone me-2"></i>+91 9599 0487 24</p>
+            <p><i class="fas fa-phone me-2"></i>+91 9312 7157 96</p>
+          </div>
         </div>
-      </section>
-    </footer>
+      </div>
+    </section>
+  </footer>
 
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  {% block jscontent %}
+  <script src="{% static 'edu/js/jquery.js'%}"></script>
+  <script src="{% static 'edu/js/popper.js'%}"></script>
+  <script src="{% static 'edu/js/bootstrap.js'%}"></script>
+  {% endblock jscontent %}
+
+  {% block jsfooter %}
+  {% endblock jsfooter %}
 </body>
-
-
 </html>

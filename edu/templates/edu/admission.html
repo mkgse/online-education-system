@@ -1,53 +1,40 @@
 {% extends 'edu/base1.html' %}
 {% load static %}
 
-
-
 {% block content %}
-<div class="container shadow p-5 mt-5 my-3">
-    <div class="row">
-        <div class="col-sm-10">
-   
-        <div class="col-sm-4 mx-auto">
-            <h3 class="text-center ">Login</h3>
-             
-        </div>
-        <form action="" method="post" novalidate " class="mt-2">
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 90vh;">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-4 shadow p-4 rounded bg-white">
         
+        <h3 class="text-center mb-4">Login</h3>
+
+        <form action="" method="post" novalidate>
             {% csrf_token %}
             {% for fm in form %}
-            <div class="row ">
-                <div class="col-sm-4 mx-auto">
-            <div class="form-group">
-              {{fm.label_tag}} {{fm}} <small class="text-danger">{{fm.errors|striptags}}</small><br>
+                <div class="form-group mb-3">
+                    {{ fm.label_tag }}
+                    {{ fm }}
+                    <small class="text-danger">{{ fm.errors|striptags }}</small>
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+
+            <div class="text-center mt-3">
+                <a href="{% url 'signup' %}">Create New Account Here</a>
             </div>
-        </div>
-        </div>
-            {% endfor %}
-            <input type="submit" value="Login" class="btn btn-primary offset-4 col-sm-4 col-4">
-         <a href="{% url 'signup' %}" class="col-sm-4 offset-4">Create New Account Here</a>
-    
-          {% if form.non_field_errors %}
-            {% for error in form.non_field_errors %}
-            <p class="alert alert-danger my-3">{{error}}</p>
-            {% endfor %}
-          {% endif %}
+
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                    <p class="alert alert-danger mt-3">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
         </form>
-    
-        </div>
-    
+
+        {% if messages %}
+            {% for message in messages %}
+                <script>alert('{{ message }}')</script>
+            {% endfor %}
+        {% endif %}
     </div>
 </div>
-
-<div class="row" mt-1>
-  <div class="col-sm-4 offset-4">
-{% if messages %}
- {% for message in messages %}
- <span {% if message.tags %} class="alert-{{message.tags}}" {% endif %}><script>alert('{{message}}')</script></span>
- {% endfor %}
-{% endif %} 
-</div>
-</div>
-
-        
 {% endblock content %}

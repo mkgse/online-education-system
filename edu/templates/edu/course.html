@@ -1,13 +1,13 @@
 {% extends 'edu/base1.html' %}
 {% load static %}
 
-{% block content %}
+ {% block content %} 
 
 <div class="container text-center mt-5 cont p-5 shadow mx-auto">
-  <div class="row">
-    <div class="col-sm-8 offset-1">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
           <h3 class="text-center" >Check Available Courses Here</h3><br>
-          <select class="" style="width: 100%;height: 30px ;" id="SelectA" onclick="display();">
+          <select class="form-control"  id="SelectA" onclick="display();">
             <option value="zz">--Choose Courses--</option>
             <option value="aa">Tution</option>
             <option value="bb">DCA</option>
@@ -33,9 +33,9 @@
   </div>
 </div>
 <div class="container text-center mt-5 cont">
-    <div class="row mt-2">
-      <div class="col-sm-6 offset-3" style="display: none;" id="a">
-            <h3 class="text-center" style="font-size:30px;font-family: sans-serif;background-color: blue;color: white; font-weight: bold;">9th OR 10th</h3>
+    <div class="row mt-4">
+      <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2" style="display: none;" id="a">
+            <h3 class="h4 h3-md text-center text-white bg-primary fw-bold py-2" >9th OR 10th</h3>
              <p style="font-size:25px; font-weight: bold;">Subjects : </p>
             <p style="color:red; font-size: 22px; font-family: 'Times New Roman', Times, serif; ">Hindi, English, Math, Science, Social Science, Drawing or Sanskrit</p>
             <h3 style="color:green; font-size: 22px; font-family: 'Times New Roman', Times, serif;"><p style="color:black; font-weight: bold;">Fees Structure : </p>
@@ -435,4 +435,3 @@
 {% block jscontent %}
 <script src="{% static 'edu/js/my.js'%}"></script>
 {% endblock jscontent %}
- 

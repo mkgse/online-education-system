@@ -5,12 +5,15 @@
 
 {% block content %}
 
-<div class="container-fluid my-3 mt-3 shadow p-3">
+<div class="container-fluid " style="width: 100vw; padding: 20px; margin:100px 0px 60px 0px;; border-radius:10px;">
   <h3 class="text-center alert alert-success">Update Student Admission Status</h3>
-<table class="table">
+    <div class="text-end mb-3">
+    <a href="{% url 'AdmissionStatus' %}" class="btn btn-primary">+ Add Admission Status</a>
+  </div>
+<table class="table table-bordered table-striped">
     <thead>
       <tr>
-        <th scope="col">User Id</th>
+        <th scope="col">S.No.</th>
         <th scope="col">User Name</th>
         <th scope="col">Registration Amount</th>
         <th scope="col">Admission Date</th>
@@ -22,13 +25,17 @@
     {% for fm in form %}
     <tbody>
       <tr>
-        <td>{{fm.id}}</td>
-        <td>{{fm.user}}</td>
-        <td>{{fm.reg_amount}}</td>
+        <td>{{forloop.counter}}</td>
+        <td>{{fm.user.username}}</td>
+        <td>{{fm.display_amount|floatformat:0}}</td>
         <td>{{fm.admissin_date}}</td>
         <td>{{fm.admission_status}}</td>
         <td>
            <a href="{%  url 'updatestatus' fm.id %}" class="btn btn-warning btn-sm">Update Status</a>
+          <form action="{%  url 'deletestatus' fm.id %}" method="POST" class="d-inline"  enctype="multipart/form-data">
+            {% csrf_token %}
+           <input type="submit" value="Delete" class="btn btn-danger btn-sm"/>
+           </form>
         </td>
         
       </tr>
@@ -44,7 +51,30 @@
     {% endif %}
   </table>
 
+   <!-- --------------paginator------------------------------- -->
+     <nav area-label="Page navigation">
+      <ul class="pagination justify-content-center">
+        {% if form.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{admission_list.previous_page_number}}">Previous</a>
+        </li>
+        {% endif %}
+        {% for num in form.paginator.page_range %}
+        {% if form.number == num %}
+         <li class="page-item active"><span class="page-link">{{num}}</span></li>
+         {% elif num > form.number|add:'-3' and num < form.number|add:'3' %}
+         <li class="page-item"><a class="page-link" href="?page={{num}}">{{num}}</a></li>
+         {% endif %}
+         {% endfor %}
 
+         {% if form.has_next %}
+         <li class="page-item">
+          <a class="page-link" href="?page={{admission_list.next_page_number}}">Next</a>
+         </li>
+         {% endif %}
+      </ul>
+
+     </nav>
 
 
 <div class="col-sm-4 offset-4">

@@ -51,7 +51,7 @@ class AdmDetails(forms.ModelForm):
         'lastname':forms.TextInput(attrs={'class':'form-control'}),
         'fathername':forms.TextInput(attrs={'class':'form-control'}),
         'mothername':forms.TextInput(attrs={'class':'form-control',}),
-        'dob':forms.DateInput(attrs={'class':'form-control','id':'txtDate'}),
+        'dob':forms.DateInput(attrs={'class':'form-control','id':'txtDate','placeholder': 'MM/DD/YYYY'}),
         'mobile':forms.TextInput(attrs={'class':'form-control'}),
         'email':forms.EmailInput(attrs={'class':'form-control'}),
         'address':forms.TextInput(attrs={'class':'form-control'}),
@@ -86,14 +86,24 @@ class PaymentDetails(forms.ModelForm):
 class AdmissionDetails(forms.ModelForm):
      class Meta:
           model = Admission_Status
-          fields = ['user','reg_amount','admission_status']
-          labels = {'user':'UserName', 'reg_amount':'Registration Amount','admission_status':'Admission Status'}
-          widgets = {'user':forms.TextInput(attrs={'class':'form-control'}),
-                     'reg_amount':forms.Select(attrs={'class':'form-control'}),
-                     'admission_status':forms.Select(attrs={'class':'form-control'}),
-                    
-          
+          fields = ['admission_status']
+          labels = {'admission_status':'Admission Status'}
+          widgets = {
+            'reg_amount': forms.Select(attrs={'class': 'form-select'}),
         }
+class AddAdmissionStatus(AdmissionDetails):
+      class Meta:
+          model = Admission_Status
+          fields = ['user', 'reg_amount', 'admission_status']
+          widgets = {
+            'admission_status': forms.Select(attrs={'class': 'form-select'}),
+            'user': forms.Select(attrs={'class': 'form-select'}),
+            'reg_amount': forms.Select(attrs={'class': 'form-select'}),
+        }
+
+        
+       
+   
 class FeedbackForm(forms.ModelForm):
      class Meta:
           model = Feedback

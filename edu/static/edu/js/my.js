@@ -96,101 +96,37 @@ function myFunction2() {
 
 function display(){
   var x = document.getElementById('SelectA').value;
+   var sections = ['a','b','c','d','e','f','g','h','i','j',
+                  'k','l','m','n','o','p','q','r','s','t','z'];
 
-  if (x=="aa"){
-    document.getElementById('a').style.display="block";
-    document.getElementById('b').style.display="none";
-  }
-   if (x=="bb"){
-    document.getElementById('a').style.display="none";
-    document.getElementById('b').style.display="block";
-  }
-   if (x=="cc"){
-    document.getElementById('c').style.display="block";
-    document.getElementById('d').style.display="none";
-  }
+  sections.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.style.display = "none";
+  });
 
+  // Show only the selected one(s)
+  switch(x) {
+    case "aa": document.getElementById('a').style.display = "block"; break;
+    case "bb": document.getElementById('b').style.display = "block"; break;
+    case "cc": document.getElementById('c').style.display = "block"; break;
+    case "dd": document.getElementById('d').style.display = "block"; break;
+    case "ee": document.getElementById('e').style.display = "block"; break;
+    case "ff": document.getElementById('f').style.display = "block"; break;
+    case "gg": document.getElementById('g').style.display = "block"; break;
+    case "hh": document.getElementById('h').style.display = "block"; break;
+    case "ii": document.getElementById('i').style.display = "block"; break;
+    case "jj": document.getElementById('j').style.display = "block"; break;
+    case "kk": document.getElementById('k').style.display = "block"; break;
+    case "ll": document.getElementById('l').style.display = "block"; break;
+    case "mm": document.getElementById('m').style.display = "block"; break;
+    case "nn": document.getElementById('n').style.display = "block"; break;
+    case "oo": document.getElementById('o').style.display = "block"; break;
+    case "pp": document.getElementById('p').style.display = "block"; break;
+    case "qq": document.getElementById('q').style.display = "block"; break;
+    case "rr": document.getElementById('r').style.display = "block"; break;
+    case "ss": document.getElementById('s').style.display = "block"; break;
+    case "tt": document.getElementById('t').style.display = "block"; break;
+    case "zz": document.getElementById('z').style.display = "block"; break;
+  }
+}
 
-  if (x=="dd"){
-    document.getElementById('c').style.display="none";
-    document.getElementById('d').style.display="block";
-  }
-  if (x=="ee"){
-    document.getElementById('e').style.display="block";
-    document.getElementById('f').style.display="none";
-  }
-   if (x=="ff"){
-    document.getElementById('e').style.display="none";
-    document.getElementById('f').style.display="block";
-  }
-
-  if (x=="gg"){
-    document.getElementById('g').style.display="block";
-    document.getElementById('h').style.display="none";
-  }
-   if (x=="hh"){
-    document.getElementById('g').style.display="none";
-    document.getElementById('h').style.display="block";
-  }
-
-  if (x=="ii"){
-    document.getElementById('i').style.display="block";
-    document.getElementById('j').style.display="none";
-  }
-   if (x=="jj"){
-    document.getElementById('i').style.display="none";
-    document.getElementById('j').style.display="block";
-  }
-
-  if (x=="kk"){
-    document.getElementById('k').style.display="block";
-    document.getElementById('l').style.display="none";
-  }
-   if (x=="ll"){
-    document.getElementById('k').style.display="none";
-    document.getElementById('l').style.display="block";
-  }
-
-  if (x=="mm"){
-    document.getElementById('m').style.display="block";
-    document.getElementById('n').style.display="none";
-  }
-   if (x=="nn"){
-    document.getElementById('m').style.display="none";
-    document.getElementById('n').style.display="block";
-  }
-
-  if (x=="oo"){
-    document.getElementById('o').style.display="block";
-    document.getElementById('p').style.display="none";
-  }
-   if (x=="pp"){
-    document.getElementById('o').style.display="none";
-    document.getElementById('p').style.display="block";
-  }
-
-  if (x=="qq"){
-    document.getElementById('q').style.display="block";
-    document.getElementById('r').style.display="none";
-  }
-   if (x=="rr"){
-    document.getElementById('q').style.display="none";
-    document.getElementById('r').style.display="block";
-  }
-
-
-  if (x=="ss"){
-    document.getElementById('s').style.display="block";
-    document.getElementById('t').style.display="none";
-  }  
-
-   if (x=="tt"){
-    document.getElementById('s').style.display="none";
-    document.getElementById('t').style.display="block";
-   }  
-
-   else if(x=="zz"){
-    document.getElementById('z').style.display="block";
-   }
-
-} 

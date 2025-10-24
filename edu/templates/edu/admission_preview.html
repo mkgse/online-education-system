@@ -1,0 +1,176 @@
+{% extends 'edu/base1.html' %}
+{% load static %}
+
+{% block content3 %}
+
+ <div class="container print-container" style="width: 100vw; padding: 20px; margin:100px 0px 60px 0px;; border-radius:10px;">
+    <h2 class="text-center">Student Admission Form</h2>
+
+  
+       <h4>Persional Details</h4> 
+    <hr> 
+    <table class="table table-bordered mt-1 p-3 text-center">
+       
+        <tbody>
+  
+          <tr>
+            <td>First Name</td>
+            <td>{{data.firstname}}</td>
+            <td>Middle Name</td>
+            <td>{{data.middlename}}</td>
+            <td>Last Name</td>
+            <td>{{data.lastname}}</td>
+        </tr>
+        <tr>
+            <td>Father Name</td>
+            <td>{{data.fathername}}</td>
+            <td>Mother Name</td>
+            <td>{{data.mothername}}</td>
+            <td>Date of Birth</td>
+           <td>{{data.dob}}</td>
+        
+          </tr>
+          <tr>
+            <td>Gender</td>
+            <td>{{data.gender}}</td>
+            <td>Mobile</td>
+            <td>{{data.mobile}}</td>
+            <td>Email Id</td>
+           <td>{{data.email}}</td>
+        
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>{{data.address}}</td>
+            <td>City</td>
+            <td>{{data.city}}</td>
+            <td>State</td>
+           <td>{{data.state}}</td>
+          </tr>
+          <tr>
+            <td>Pincode</td>
+           <td>{{data.pin}}</td>
+          </tr>
+          
+        </tbody>
+        
+      </table>
+
+      <h4>Educational Details</h4> 
+    <hr> 
+    <table class="table table-bordered mt-1 p-3 text-center">
+       
+        <tbody>
+  
+          <tr>
+            <th>S.N.</th>
+            <th>Examination</th>
+            <th>Board</th>
+            <th>Passing Year</th>
+            <th>Percentage</th>
+            <th>Roll No.</th>
+        </tr>
+        <tr>
+            <td>1.</td>
+            <td>Class X</td>
+            <td>{{data.board}}</td>
+            <td>{{data.passing_year}}</td>
+            <td>{{data.percentage}}</td>
+            <td>{{data.roll_number}}</td>
+
+          </tr>
+          <tr>
+            <td>2.</td>
+            <td>Class XII</td>
+            <td>{{data.board1}}</td>
+            <td>{{data.passing_year1}}</td>
+            <td>{{data.percentage1}}</td>
+            <td>{{data.roll_number1}}</td>
+        
+          </tr>
+          <tr>
+            <td>3.</td>
+            <td>Graduation</td>
+            <td>{{data.board2}}</td>
+            <td>{{data.passing_year2}}</td>
+            <td>{{data.percentage2}}</td>
+            <td>{{data.roll_number2}}</td>
+         
+          </tr>
+          
+        </tbody>
+        
+      </table>
+      <h4>Document Details</h4> 
+    <hr> 
+    <table class="table table-bordered mt-1 p-3 text-center">
+       
+        <tbody>
+  
+          <tr>
+            <td>Photo</td>
+            {% if data.photo %}
+            <td class="text-center"><img src="{{data.photo.url}}" alt=""
+             class="img-fluid img-thumbnail" width="100" height="100"></td>
+            {% else %}
+             <p>No Photo</p>
+             {% endif %}   
+             
+            <td>Signature</td>
+            {% if data.signature %}
+            <td><img src="{{data.signature.url}}" alt=""
+               class="img-fluid img-thumbnail " width="100" height="100"></td>
+              {% else %}
+              <p>No Signatur</p>
+              {% endif %}
+
+            <td>Matriculation</td>
+          
+            <td>{{data.matriculation}} </td>
+        </tr>
+        <tr>
+            <td>Intermediate</td>
+            <td>{{data.intermediate}}</td>
+            <td>Graduation</td>
+            <td>{{data.graducation}}</td>
+            <td>Post Graduation</td>
+           <td>{{data.postgraducation}}</a></td>
+        
+          </tr>
+          <tr>
+            <td>Address Proof</td>
+            <td>{{data.address_proof}}</td>
+        
+          </tr>
+          
+        </tbody>
+        
+      </table>
+
+      <h4>Course Details</h4> 
+    <hr> 
+    <table class="table table-bordered mt-1 p-3 text-center">
+       
+        <tbody>
+  
+          <tr>
+            <td>Course Applied For</td>
+            <td>{{data.course_applied_for}}</td>
+          
+        </tr>
+        
+          
+        </tbody>
+        
+      </table>
+    <!-- Confirm/Back Buttons -->
+     <div>
+  <form action  method="post" >
+    {% csrf_token %}
+     <button type="submit" name="confirm" class="btn btn-success ">Confirm</button>
+     <a href="{% url 'admission_edit' pk=data.pk %}" class="btn btn-warning">Edit</a>
+  </form>
+  </div>
+
+</div>
+{% endblock content3 %}

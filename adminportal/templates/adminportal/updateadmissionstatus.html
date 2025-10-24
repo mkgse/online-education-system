@@ -6,32 +6,35 @@
 
 {% block content3 %} 
 
-<style>
-  .container{
-    width: 80%;
-  }
-</style>
+<div class="container " style="width: 100vw; padding: 20px; margin:100px 100px 60px 50px; border-radius:10px;">
+  <h3 class="text-center mb-4">Update Admission Status</h3>
 
-<div class="container mt-4 my-3">
-  <h3 class="text-center">Update Admission Status</h3>
-   
-<form action="" method="POST" enctype="multipart/form-data" class="shadow offset-0 p-3">   
- 
-{% csrf_token %}
- 
-{{form.as_p}}
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      
+      <div class="card shadow-lg p-4">
+        <p>User Name: </p>
+        <p class="form-control">{{ student.user.username }}</p>
+        <p>Payment Amount:</p>
+        <p class="form-control">{{ student.display_amount|floatformat:0 }}</p>
+        <p>Payment Date: </p>
+        <p class="form-control">{{ student.reg_amount.payment_date|date:"Y-m-d" }}</p>
 
- {% for st in form %}
-     <div>
-      <small class="text-danger">{{st.errors|striptags}}</small>
-     </div>
-  {% endfor %}
- 
-  <input type="submit" value="Update" onClick='return confirmSubmit()' class="btn btn-primary col-sm-3 offset-3">    
-  <a href="{% url 'admstatus'%}" class="btn btn-success col-sm-3">Back to Home</a>
+        <form method="POST" class="mt-3">
+          {% csrf_token %}
+          {{ form.as_p }}
+
+          <div class="d-flex justify-content-between mt-4">
+            <input type="submit" value="Update" onClick="return confirmSubmit()" class="btn btn-primary">
+            <a href="{% url 'admstatus' %}" class="btn btn-success">Back to Home</a>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
   
-  </form>
-
+</div>
 
   <div class="col-sm-4 offset-4">
     {% if messages %}
@@ -42,11 +45,6 @@
    
     
     </div>
-    </div>
-</div>
-
-  
-
  
 
 {% endblock content3 %}

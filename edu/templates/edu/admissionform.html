@@ -1,293 +1,245 @@
 {% extends 'edu/base1.html' %}
-
 {% load static %}
 
-{% block css %}
-<link rel="stylesheet" href="{% static 'edu/css/education.css' %}">
-
-{% endblock css %}
 
 
+{% block content3 %}
 
-{% block content3 %} 
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"/>
 
+<script>
+$(function() {
+    $("#txtDate").datepicker({
+        dateFormat:'mm/dd/yy',
+        changeMonth:true,
+        changeYear:true,
+        yearRange:"1980:2015"
+    });
+});
 
-
-<script type="text/javascript" 
-        src="https://code.jquery.com/jquery-1.12.4.js">
-    </script>
-    <script type="text/javascript" src=
-        "https://code.jquery.com/ui/1.12.1/jquery-ui.js">
-    </script>
-    <link type="text/css" href=
-    "https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
-            rel="stylesheet" />
-   
-    
-            <script>
-                $(document).ready(function() {
-                    $("#txtDate").datepicker({dateFormat:'mm/dd/yy',
-                    changeMonth:true,
-                    changeYear:true,
-                    yearRange:"1980:2015"
-                });
-                    
-                     
-                });
-            </script>        
+</script>
 
 <style>
 label {
   padding-left: 5px;
-  font-family:Arial, Helvetica, sans-serif
+  font-family: Arial, Helvetica, sans-serif;
 }
-
 </style>
 
-{% if form|length > 0 %}
-  {% for fm  in form %}
-     {% if fm.user == request.user %}
-     <div class="container mt-5 shadow p-5 my-5">
-        <p class="alert alert-success"><span class="text-primary">Congratulation!!</span> You have already Submited Admission form Please Print the Application form by clicking this Link <a href="{%  url 'printform' %}">View Details</a></td></p>
-        <div class="row">
-            <div class="col-sm-10">
-            <p>
-                Congratulation You have already Submit Registration Form Please Pay Registration Fees:?
-              <a href="{%  url 'payment'  %}" class="btn btn-warning btn-sm">Pay Registration Fees<a/> </p> 
-            </div>
-        </div>
-     </div>
-     
 
-     {% endif %}
+{% if form.exists %}
+  {% for fm in form %}
+    {% if fm.user == request.user %}
+      <div class="container mt-5 shadow p-5 my-5">
+        <p class="alert alert-success">
+          <span class="text-primary">Congratulations!</span> You have already submitted the Admission Form. 
+          Please print it by clicking <a href="{% url 'printform' %}">View Details</a>.
+        </p>
+        <p>
+          You have already registered. Please pay the registration fees:
+          <a href="{% url 'payment' %}" class="btn btn-warning btn-sm">Pay Now</a>
+        </p>
+      </div>
+    {% endif %}
   {% endfor %}
 {% else %}
 
 <div class="container mt-5 p-3">
-   
-<form action="" method="POST" enctype="multipart/form-data" class="shadow">   
- 
-{% csrf_token %}
-  
+<form method="POST" enctype="multipart/form-data" class="shadow">
+  {% csrf_token %}
   <h2 class="text-center alert-secondary">Admission Form</h2>
 
-   <div class="row mt-1 p-3 ">
-    <h4>Persional Details</h4>  
+  <!-- PERSONAL DETAILS -->
+   <div class="card shadow-lg rounded-3">
+    <div class="card-body">
+  <div class="row g-4">
+     <div class="card-header">
+          <h4 class="mb-0">Persional Details</h4>
+    </div>
  
+    <div class="col-sm-4"><label class="d-block">First Name <span class="text-danger ">*</span></label>
+      <div class="p-2">
+          {{ details.firstname }}
+      </div>
+      
+    </div>
+       <div class="col-sm-4"><label class="d-block">Middle Name <span class="text-danger ">*</span></label>
+      <div class="p-2">
+          {{ details.middlename }}
+      </div>
+      
+    </div>
+        <div class="col-sm-4"><label class="d-block">Last Name <span class="text-danger ">*</span> </label>
+      <div class="p-2">
+          {{ details.lastname }}
+      </div>
+      
+    </div>
+       <div class="col-sm-4 "><label class="d-block">Father Name <span class="text-danger ">*</span></label>
+      <div class="p-2">
+          {{ details.fathername }}
+      </div>
+      
+    </div>
+       <div class="col-sm-4"><label class="d-block">Mother Name <span class="text-danger ">*</span></label>
+      <div class="p-2">
+          {{ details.mothername }}
+      </div>
+      
+    </div>
+       <div class="col-sm-4"><label class="d-block">Date of Birth <span class="text-danger ">*</span></label>
+      <div class="p-2">
+          {{ details.dob }}
+      </div>
+      
+    </div>
+       <div class="col-sm-4"><label class="d-block">Gender <span class="text-danger ">*</span></label>
+      <div class="p-2">
+          {{ details.gender }}
+      </div>
+      
+    </div>
+       <div class="col-sm-4"><label class="d-block">Mobile <span class="text-danger ">*</span></label>
+      <div class="p-2">
+          {{ details.mobile }}
+      </div>
+      
+    </div>
+       <div class="col-sm-4"><label class="d-block">Email <span class="text-danger ">*</span></label>
+      <div class="p-2">
+          {{ details.email }}
+      </div>
+      
+    </div>
+       <div class="col-sm-4"><label class="d-block">Address <span class="text-danger ">*</span></label>
+      <div class="p-2">
+          {{ details.address }}
+      </div>
+      
+    </div>
+       <div class="col-sm-4"><label class="d-block">City <span class="text-danger ">*</span></label>
+      <div class="p-2">
+          {{ details.city }}
+      </div>
+      
+    </div>
+       <div class="col-sm-4"><label class="d-block">State <span class="text-danger ">*</span></label>
+      <div class="p-2">
+          {{ details.state }}
+      </div>
+      
+    </div>
+       <div class="col-sm-4"><label class="d-block">Pin Code <span class="text-danger ">*</span></label>
+      <div class="p-2">
+          {{ details.pin }}
+      </div>
+      
+    </div>
+      </div>
+  </div>
+  </div>
 
+  <!-- EDUCATIONAL DETAILS -->
+  <div class="row p-3 ">
+   <div class="card-header">
+    <h4 class="mb-0">Educational Details</h4>
+    </div>
     <hr>
-    <div class="col-sm-4">
-        <label for="id_firstname">First Name:</label>
-        {{details.firstname}}
-        
-    </div>
-    <div class="col-sm-4">
-    <label for="id_middlename">Middle  Name:</label>
-        {{details.middlename}}
-    </div>
-    <div class="col-sm-4">
-        <label for="id_lastname">Last Name:</label>
-        {{details.lastname}}
-    </div> 
-    
-  
+    <div class="col-sm-3">Board <span class="text-danger ">*</span><br>{{ details.board }}<br>{{ details.board1 }}<br>{{ details.board2 }}</div>
+    <div class="col-sm-3">Passing Year <span class="text-danger ">*</span><br>{{ details.passing_year }}<br>{{ details.passing_year1 }}<br>{{ details.passing_year2 }}</div>
+    <div class="col-sm-3">Percentage <span class="text-danger ">*</span><br>{{ details.percentage }}<br>{{ details.percentage1 }}<br>{{ details.percentage2 }}</div>
+    <div class="col-sm-3">Roll No. <span class="text-danger ">*</span><br>{{ details.roll_number }}<br>{{ details.roll_number1 }}<br>{{ details.roll_number2 }}</div>
+  </div>
 
-    <div class="col-sm-4">
-        <label for="id_fathername">Father Name:</label>
-        {{details.fathername}}
+  <!-- DOCUMENTS -->
+  <div class="card shadow-lg rounded-3">
+    <div class="card-header">
+    <h4 class="mb-0">Document Details</h4>
     </div>
-    <div class="col-sm-4">
-    <label for="id_mothername">Mother Name:</label>
-        {{details.mothername}}
-    </div>
-    <div class="col-sm-4">
- 
-        <label for="id_dob" class="col-sm-4">Date of Birth:</label>
-        {{details.dob}}
-    </div>   
-    <div class="col-sm-4 mt-4">
-        <label for="id_gender">Gender:</label>
-        {{details.gender}}
-    </div>
-    <div class="col-sm-4">
-    <label for="id_mobile">Mobile:</label>
-        {{details.mobile}}
-    </div>
-    <div class="col-sm-4">
-        <label for="id_email">Email:</label>
-        {{details.email}}
-    </div> 
-    
- 
-
-    <div class="col-sm-6">
-        <label for="id_address">Address:</label>
-        {{details.address}}
-    </div>
-    <div class="col-sm-6">
-    <label for="id_city">City:</label>
-        {{details.city}}
-    </div>
-
-
-    <div class="col-sm-6">
-        <label for="id_state">State:</label>
-        {{details.state}}
-    </div>
-    <div class="col-sm-6">
-    <label for="id_pin">Pin Code:</label>
-        {{details.pin}}
-    </div>
-    
-
-</div>  
-
-<div class="row p-3">
-    <h4>Educational Details</h4>
-    <hr>
-    <div class="col-sm-1 text-center">
-     <p>S.N.</p>
-     <p>1.</p>
-     <br>
-     <p>2.</p>
-     <p>3.</p>
-    </div>
-    <div class="col-sm-3 text-center">
-        <p>Examination</p>
-        <p>Class X</p>
-        <br>
-        <p>Class XII</p>
-        <p>Graduation</p>
-    </div>
-    <div class="col-sm-2 text-center">
-        <p>Board</p>
-        <p>{{details.board}}</p>
-        <p>{{details.board1}}</p>
-        <p>{{details.board2}}</p>  
-    </div>
-    <div class="col-sm-2 text-center">
-        <p>Passing Year</p>
-        <p>{{details.passing_year}}</p>
-        <p>{{details.passing_year1}}</p>
-        <p>{{details.passing_year2}}</p>  
-        
-    </div>
-    <div class="col-sm-2 text-center">
-        <p>Percentage</p>
-        <p>{{details.percentage}}</p>
-        <p>{{details.percentage1}}</p>
-        <p>{{details.percentage2}}</p>  
-    </div>
-    <div class="col-sm-2 text-center">
-        <p>Roll No.</p>
-        <p>{{details.roll_number}}</p>
-        <p>{{details.roll_number1}}</p>
-        <p>{{details.roll_number2}}</p>  
-    </div>
-   
-
-    
-</div>
-<div class="row p-3">
-<h4>Document Details</h4>
-<hr>
-    <div class="col-sm-6 text-center">
-        <label for="id_photo">Photo</label>
-       {{details.photo}}
+    <div class="card-body">
+      <div class="row g-4">
+    <div class="col-sm-6 text-center"><label class="fw-bold d-block">Photo <span class="text-danger ">*</span></label>
+      <div class="border rounded p-2 bg-light">
+           {{details.photo}}
+      </div>
+       </div>
+       <div class="col-sm-6 text-center"><label class="fw-bold d-block">Signature <span class="text-danger ">*</span></label>
+      <div class="border rounded p-2 bg-light">
+          {{details.signature}}
+      </div>
+       </div>
+       <div class="col-sm-6 text-center"><label class="fw-bold d-block">Matriculation</label>
+      <div class="border rounded p-2 bg-light">
+           {{ details.matriculation }}
+      </div>
+       </div>
+       <div class="col-sm-6 text-center"><label class="fw-bold d-block">Intermediate</label>
+      <div class="border rounded p-2 bg-light">
+           {{ details.intermediate }}
+      </div>
+       </div>
+       <div class="col-sm-6 text-center"><label class="fw-bold d-block">Graduation</label>
+      <div class="border rounded p-2 bg-light">
+           {{details.graducation}}
+      </div>
+       </div>
+       <div class="col-sm-6 text-center"><label class="fw-bold d-block">Post Graduation</label>
+      <div class="border rounded p-2 bg-light">
+           {{ details.postgraducation }}
+      </div>
+       </div>
+         <div class="col-sm-6 text-center"><label class="fw-bold d-block">Address Proof</label>
+      <div class="border rounded p-2 bg-light">
+          {{ details.address_proof }}
+      </div>
+       </div>
 
     </div>
-    <div class="col-sm-6 text-center">
-        <label for="id_signature">Signature</label>
-       {{details.signature}}
+  </div>
+  </div>
 
+  <!-- COURSE -->
+   <div class="card shadow-lg rounded-3">
+    <div class="card-header">
+    <h4 class="mb-0">Course Details</h4>
     </div>
-</div>
-<div class="row mt-4 p-3">
-    <div class="col-sm-6 text-center">
-        <label for="id_matriculation">Matriculation</label>
-       {{details.matriculation}}
-
+    <div class="card-body">
+  <div class="row">
+    <div class="col-sm-10 p-4"><label class="fw-bold d-block mx-3">Course Applied For</label>
+      <div class="p-3">
+       {{ details.course_applied_for }}
+      </div> 
     </div>
-    <div class="col-sm-6 text-center">
-        <label for="id_intermediate">Intermediate</label>
-       {{details.intermediate}}
-        
-    </div>
-</div>
-<div class="row mt-3 p-3">
-    <div class="col-sm-6 text-center">
-        <label for="id_graduation">Graduation</label>
-        {{details.graducation}}
+  </div>
+  </div>
+  </div>
 
-    </div>
-
-    <div class="col-sm-6 text-center ">
-        <label for="id_signature">Post Graduation</label>
-        {{details.postgraducation}}
-
-    </div>
-</div> 
-
-<div class="row mt-3 p-3">
-    <div class="col-sm-6 text-center">
-        <label for="id_address_proof">Address Proof</label>
-        {{details.address_proof}}
-
-    </div>
-
-</div> 
-
-
-<div class="row mt-1 p-3">
-    <h4>Course Details</h4>
-    <hr class="">
-    <div class="col-sm-10 p-4">
-        <label for="id_photo">Course Applied For</label>
-       {{details.course_applied_for}}
-
-    </div>
-
-    </div>
-</div>  
-
-
- {% for st in details %}
-     <div>
-      <small class="text-danger">{{st.errors|striptags}}</small>
-     </div>
+  <!-- ERRORS -->
+  {% for field in details %}
+    <div><small class="text-danger">{{field.errors }}</small></div>
   {% endfor %}
-  <input type="submit" value="Submit" onClick='return confirmSubmit()' class="btn btn-primary btn-lg col-sm-2 offset-4">    
-  <input type="reset" value="Reset" class="btn btn-danger  btn-lg col-sm-2 ">
-  </form>
-  <br>
-  <br>
+ <div class="mt-2 p-2">
+  <input type="submit" name="preview" value="Preview" onclick="return confirmSubmit()" class="btn btn-primary btn-lg col-sm-2 offset-4">
+  <input type="reset" value="Reset" class="btn btn-danger btn-lg col-sm-2">
+  </div>
+</form>
 
-  <script>
-   function confirmSubmit()
-{
-var agree=confirm("Please Check Carefully Before Submiting this Form.\nOthewise you can not Edit this form !!");
-if (agree)
- return true ;
-else
- return false ;
+<script>
+function confirmSubmit() {
+  return confirm("Please check carefully before submitting this form.\nOtherwise you cannot edit this form later!");
 }
 </script>
 
-  <div class="col-sm-4 offset-4">
-    {% if messages %}
-     {% for message in messages %}
-     <span {% if message.tags %} class="alert-{{message.tags}}" {% endif %}><script>alert('{{message}}')</script></span>
-    {% endfor %}
-    {% endif %} 
-   
-    
-    </div>
-    </div>
+<!-- Messages -->
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+  {% endfor %}
+{% endif %}
+
 </div>
 {% endif %}
+
 {% endblock content3 %}
-
-
-{% block jscontent %}
-
-{% endblock jscontent %}

@@ -32,9 +32,11 @@
 
  {% for fm in form %}
 
+ {{fm.registration_number}}
 
-
- <div class="container mt-5 print-container" >
+ <div class="container print-container" style="width: 100vw; padding: 20px; margin:100px 0px 60px 0px;; border-radius:10px;">
+    <h2 class="text-center">Student Admission Form</h2>
+    <h5 class="text-center">Your Registration Number is: <span class="text-primary fw-bold">{{fm.registration_number }}</span></h5>
     <h4>Persional Details</h4> 
     <hr> 
     <table class="table table-bordered mt-1 p-3 text-center">
@@ -137,14 +139,21 @@
   
           <tr>
             <td>Photo</td>
-  
+            {% if fm.photo %}
             <td class="text-center"><img src="{{fm.photo.url}}" alt=""
-             
-                class="img-fluid img-thumbnail" width="100" height="100"></td>
+             class="img-fluid img-thumbnail" width="100" height="100"></td>
+            {% else %}
+             <p>No Photo</p>
+             {% endif %}   
              
             <td>Signature</td>
+            {% if fm.signature %}
             <td><img src="{{fm.signature.url}}" alt=""
                class="img-fluid img-thumbnail " width="100" height="100"></td>
+              {% else %}
+              <p>No Signatur</p>
+              {% endif %}
+
             <td>Matriculation</td>
           
             <td>{{fm.matriculation}} </td>
@@ -159,7 +168,7 @@
         
           </tr>
           <tr>
-            <td>Address</td>
+            <td>Address Proof</td>
             <td>{{fm.address_proof}}</td>
         
           </tr>

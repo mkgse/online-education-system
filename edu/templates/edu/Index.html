@@ -1,79 +1,226 @@
-
 {% extends 'edu/base1.html' %}
 {% load static %}
 
 {% block css %}
-<!-- <link rel="stylesheet" href="{% static 'edu/css/myboot.css' %}"> -->
+<style>
+  /* Responsive tweaks */
+  .carousel img {
+    /* object-fit: cover; */
+    height: 70vh;
+  }
+
+  .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .card img {
+    height: 220px;
+    object-fit: cover;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .carousel img {
+      height: 40vh;
+    }
+
+    .card img {
+      height: 180px;
+    }
+  }
+</style>
 {% endblock css %}
 
 {% block content %}
-<div class="container-fluid p-0 m-0 ">
-  <div class="row">
-    <div class="col-12">
+<!-- Carousel -->
+<div class="container-fluid p-0 m-0">
   <div id="carouselExampleControls" class="carousel slide mt-5" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="{% static 'core/images/img1.jpg' %}" class="d-block w-100" alt="..." width="700px" height="600px">
+        <img src="{% static 'edu/images/vcsa.jpg' %}" class="d-block w-100" alt="...">
       </div>
       <div class="carousel-item">
-        <img src="{% static 'core/images/img2.jpg'%}" class="d-block w-100" alt="..." width="700px" height="600px">
+        <img src="{% static 'edu/images/image2.jpg'%}" class="d-block w-100" alt="...">
       </div>
       <div class="carousel-item">
-        <img src="{% static 'core/images/img3.jpg'%}" class="d-block w-100" alt="..." width="700px" height="600px">
+        <img src="{% static 'edu/images/image3.jpg'%}" class="d-block w-100" alt="...">
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
+      <span class="carousel-control-prev-icon"></span>
     </button>
     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
+      <span class="carousel-control-next-icon"></span>
     </button>
   </div>
 </div>
-</div>
-</div>
-</div>
 {% endblock content %}
-  
+
+<!-- Premium Courses -->
 {% block content1 %}
-<div class="container-fluid  p-2 m-3">
-  <div class="row ">
-    <div class="col-sm-4 col-4 card">
-      <h3 class="text-center bg-dark text-white card-header mt-1">Our Mission</h3>
-      <p class="mt-1">Our Mission at VCSA COMPUTER INSTITUTE is to empower students in Computer Technology especially in software programs to all members of society with preference for discriminated sectors victimized by socio economic inequality. As F. Bacon said, "knowledge is power
-        The mission of the CSC is to create and maintain a computing environment for the pursuit of academic excellence and quality management; to provide quality professional services to students, staff and administration;".<span id="dots">...</span>
-       
-
-          to promote and assist the use of new computing technology; to ensure effective use of computing resources;
-          
-          to co-operate with Computer Centres of other institutions of higher education and professional bodies and to render professional services in response to the need of society and community.
-          
-          To strive for excellence in development and deployment of computer applications. To undertake collaborative projects which offer opportunities for long-term interaction with academia and industry.
-          
-          Our efforts are dedicated to impart quality and value based education to raise satisfaction level of all stake-holders. Our strength is directed to create competent professionals. Our endeavour is to provide all possible support to promote research and development activities.He also Develope  Mental and Technical Knowldge of any enduser.</span></p>
-      
+<div class="container my-5">
+  <h2 class="text-center section-title">Premium Courses</h2>
+  <div class="row g-4 justify-content-center">
+    <div class="col-lg-4 col-md-6">
+      <div class="card h-100">
+        <img src="{% static 'edu/images/image.jpg'%}" class="card-img-top" alt="...">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">Advance Excel</h5>
+          <p class="card-text flex-grow-1">Advanced Excel goes beyond basic spreadsheets, covering advanced formulas,
+            pivot tables, VBA macros, and dashboards.</p>
+          <a href="#" class="btn btn-primary mt-auto">View Course</a>
+        </div>
+      </div>
     </div>
-    <div class="col-sm-4 col-4 card">
-      <h2 class="text-center bg-success text-white card-header mt-1">Our Vision</h2>
-      <p class="mt-1">Our Vision at VCSA COMPUTER INSTITUTE is to use a tool for higher education To make our nation a Computer Literate nation not only by educating the Rural India along with the urban population. To increase contribution of women in the field of IT by providing the computer education at affordable cost.
 
-        We will become one of the top IT service providers in the UP science and education sector and achieve highest ratings in student satisfaction.
-        To increase the opportunity for the students
-        >to have their own computer education center or their own business in field of computer.
-
-          To make our nation a Computer Literate nation not only by educating the Rural India along with the urban population. To provide education to every income group so that every economy class can afford the expensive computer education.
-          
-          To increase contribution of women in the field of IT by providing the computer education at affordable cost. To build computer literate villages in every district of India and awake the youth to be apart of the Computer literate Society.
-          
-          To empower the Nation by educating the youth and provide qualified and skill Computer Literates. To reduce the unemployment rate by making entrepreneurs in the field of computer
-          
-          To nourish the technical skill of future of India, the children’s by computer training. To make the society aware of Computer and make them walk with the pace of Global World.</span></p>
+    <div class="col-lg-4 col-md-6">
+      <div class="card h-100">
+        <img src="{% static 'edu/images/nn.png'%}" class="card-img-top" alt="...">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">Video Editing</h5>
+          <p class="card-text flex-grow-1">Learn professional video editing: cutting, transitions, color grading,
+            effects, and audio editing for YouTube & more.</p>
+          <a href="#" class="btn btn-primary mt-auto">View Course</a>
+        </div>
+      </div>
     </div>
-    <div class="col-sm-4 col-4 card">
-      <h2 class="text-center bg-primary text-white card-header mt-1">Our Object</h2>
-      <p>Our Objective therefore is to create an atmosphere of values that foster a comprehensive approach to the growth of students including their spiritual development that will generate not only integrity but also give back to society their skills and create a world of equal opportunities as God's children.
+
+    <div class="col-lg-4 col-md-6">
+      <div class="card h-100">
+        <img src="{% static 'edu/images/web.jpg'%}" class="card-img-top" alt="...">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">Web Development</h5>
+          <p class="card-text flex-grow-1">Build modern, responsive websites with HTML, CSS, JavaScript & frameworks for
+            professional web apps.</p>
+          <a href="#" class="btn btn-primary mt-auto">View Course</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content1 %}
+
+<!-- Upcoming Courses -->
+{% block content2 %}
+<div class="container my-5">
+  <h2 class="text-center section-title">Upcoming Courses</h2>
+  <div class="row g-4 justify-content-center">
+    <div class="col-lg-4 col-md-6">
+      <div class="card h-100">
+        <img src="{% static 'edu/images/image.jpg'%}" class="card-img-top" alt="...">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">Advance Excel</h5>
+          <p class="card-text flex-grow-1">Master advanced formulas, pivot tables, and Power Query to boost your
+            productivity.</p>
+          <a href="#" class="btn btn-primary mt-auto">View Course</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+      <div class="card h-100">
+        <img src="{% static 'edu/images/nn.png'%}" class="card-img-top" alt="...">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">Video Editing</h5>
+          <p class="card-text flex-grow-1">Edit videos like a pro with transitions, color correction, and special
+            effects.</p>
+          <a href="#" class="btn btn-primary mt-auto">View Course</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+      <div class="card h-100">
+        <img src="{% static 'edu/images/web.jpg'%}" class="card-img-top" alt="...">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">Web Development</h5>
+          <p class="card-text flex-grow-1">Learn responsive frontend & backend development with modern tools &
+            frameworks.</p>
+          <a href="#" class="btn btn-primary mt-auto">View Course</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content2 %}
+
+<!-- Our Goal Section -->
+{% block content3 %}
+<div class="container my-5">
+  <h2 class="text-center section-title">Our Goal</h2>
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="card h-100">
+        <h4 class="card-header bg-dark text-white">Our Mission</h4>
+        <div class="card-body">
+          <p class="mt-1">Our Mission at SAMARTH COMPUTER INSTITUTE is to empower students in Computer Technology
+            especially in software programs to all members of society with preference for discriminated sectors
+            victimized by socio economic inequality. As F. Bacon said, "knowledge is power
+            The mission of the CSC is to create and maintain a computing environment for the pursuit of academic
+            excellence and quality management; to provide quality professional services to students, staff and
+            administration;".<span id="dots">...</span>
+
+
+            to promote and assist the use of new computing technology; to ensure effective use of computing resources;
+
+            to co-operate with Computer Centres of other institutions of higher education and professional bodies and to
+            render professional services in response to the need of society and community.
+
+            To strive for excellence in development and deployment of computer applications. To undertake collaborative
+            projects which offer opportunities for long-term interaction with academia and industry.
+
+            Our efforts are dedicated to impart quality and value based education to raise satisfaction level of all
+            stake-holders. Our strength is directed to create competent professionals. Our endeavour is to provide all
+            possible support to promote research and development activities.He also Develope Mental and Technical
+            Knowldge of any enduser.</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100">
+        <h4 class="card-header bg-success text-white">Our Vision</h4>
+        <div class="card-body">
+          <p class="mt-1">Our Vision at SAMARTH COMPUTER INSTITUTE is to use a tool for higher education To make our nation
+            a Computer Literate nation not only by educating the Rural India along with the urban population. To
+            increase contribution of women in the field of IT by providing the computer education at affordable cost.
+
+            We will become one of the top IT service providers in the UP science and education sector and achieve
+            highest ratings in student satisfaction.
+            To increase the opportunity for the students
+            >to have their own computer education center or their own business in field of computer.
+
+            To make our nation a Computer Literate nation not only by educating the Rural India along with the urban
+            population. To provide education to every income group so that every economy class can afford the expensive
+            computer education.
+
+            To increase contribution of women in the field of IT by providing the computer education at affordable cost.
+            To build computer literate villages in every district of India and awake the youth to be apart of the
+            Computer literate Society.
+
+            To empower the Nation by educating the youth and provide qualified and skill Computer Literates. To reduce
+            the unemployment rate by making entrepreneurs in the field of computer
+
+            To nourish the technical skill of future of India, the children’s by computer training. To make the society
+            aware of Computer and make them walk with the pace of Global World.</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100">
+        <h4 class="card-header bg-primary text-white">Our Objective</h4>
+        <div class="card-body">
+          <p>Our Objective therefore is to create an atmosphere of values that foster a comprehensive approach to the growth of students including their spiritual development that will generate not only integrity but also give back to society their skills and create a world of equal opportunities as God's children.
 
         To provide participants with the opportunity to gain accredited, marketable work skills which in turn can lead to employment opportunities,To develop confidence and self-esteem <span id="dots2">...</span>
          by helping participants to become involved in Computer Training
@@ -84,18 +231,14 @@
           
           In present time, some big Institution run their certificate/ diploma programme in higher charges, due to which the lower and middle class families of our society cannot afford the load of their charges.
           
-          Our mission studied their theme properly and decided to provide better higher technical education in computer.
+          Our mission studied their theme properly and decided to provide better higher technical education in computer.</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
-
-        
-{% endblock content1 %}
-
+{% endblock content3 %}
 
 {% block jsfooter %}
 <script src="{% static 'edu/js/my.js'%}"></script>
 {% endblock jsfooter %}
-
-

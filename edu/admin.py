@@ -9,12 +9,13 @@ class PersionalModelAdmin(admin.ModelAdmin):
 
 @admin.register(Payment)
 class PaymentModelAdmin(admin.ModelAdmin):
-    list_display = ['id','user','payment_date','paymentid','paid','amount']
+    list_display = ['id','user','payment_date','paymentid','amount_status','display_amount']
+
+
 @admin.register(Admission_Status)
 class AdmissionStatusModelAdmin(admin.ModelAdmin):
-    list_display = ['id','user','reg_amount','admissin_date','admission_status'
-]
-
+    list_display = ['id','user','display_amount','admissin_date','admission_status']
+                                                                  
 @admin.register(Feedback)
 class FeedbackModelAdmin(admin.ModelAdmin):
     list_display = ['id','name','email','message']

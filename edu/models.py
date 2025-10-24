@@ -1,6 +1,8 @@
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
+
 
 
 # Create your models here
@@ -116,6 +118,14 @@ class Addmissionform(models.Model):
     postgraducation=models.FileField(upload_to='postgraducationdoc',blank=True)
     address_proof=models.FileField(upload_to='photodoc',blank=True)
     course_applied_for=models.CharField(choices=COURSE_CHOICE,max_length=25)
+    registration_number = models.CharField(max_length=20,unique=True,null=True)
+
+    def save(self,*args,**kwargs):
+        if not self.registration_number:
+            last_id = Addmissionform.objects.all().count()+1
+            self.registration_number = f"SV{timezone.now().year}{last_id:04d}"
+        super().save(*args, **kwargs)
+           
     
     # def __str__(self):
     #     return self.user
@@ -123,12 +133,22 @@ class Addmissionform(models.Model):
 class Payment(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     payment_date = models.DateTimeField(auto_now_add=True)
-    amount = models.CharField(max_length=100)
-    paymentid = models.CharField(max_length=100,default=False)
+    amount = models.IntegerField()
+    order_id = models.CharField(max_length=100,unique=True)
+    signature = models.CharField(max_length=200,blank=True,null=True)
+    paymentid = models.CharField(max_length=100,blank=True,null=True)
     paid = models.BooleanField(default=False)
 
     def __str__(self):
-        return str(self.amount)
+        return f"{self.user.username}-{self.amount/100} INR - {'Paid' if self.paid else 'Pending'}"
+    @property
+    def amount_status(self):
+        return f"{'Success' if self.paid else 'Fail'}"
+
+        
+    @property
+    def display_amount(self):
+        return self.amount / 100
    
 STATUS_CHOICE=(
     ('Payment_Not_Completed','Payment_Not_completed'),
@@ -141,6 +161,11 @@ class Admission_Status(models.Model):
     reg_amount = models.ForeignKey(Payment,on_delete=models.CASCADE)
     admissin_date =models.DateTimeField(auto_now_add=True)
     admission_status = models.CharField(max_length=50,choices=STATUS_CHOICE,default='Pending')
+
+    @property
+    def display_amount(self):
+        return self.reg_amount.amount / 100
+  
 class Feedback(models.Model):
     name=models.CharField(max_length=70)
     email=models.EmailField(max_length=100)

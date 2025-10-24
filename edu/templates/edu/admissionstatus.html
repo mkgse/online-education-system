@@ -2,16 +2,13 @@
 
 {% load static %}
 
-{% block css %}
-<link rel="stylesheet" href="{% static 'edu/css/education.css' %}">
-
-{% endblock css %}
 
 {% block content3 %} 
 
-<div class="container m-auto my-5 p-5 shadow">
-  {% for st in admstatus %}
+<div class="container " style="width: 100vw; min-height: 50vh; padding:80px;">
 
+   {% if admstatus %}
+   {% for st in admstatus %}
   <table class="table">
     <thead class="thead-dark">
       <tr>
@@ -27,11 +24,13 @@
         <td>{{st.reg_amount}}</td>
         <td>{{st.admissin_date}}</td>
         <td>{{st.admission_status}}</td>
-      </tr>
+        </tr>
     </tbody>
   </table>
-
   {% endfor %}
+  {% else %}
+  <h4 class="text-center">No Staus Found</4>
+  {% endif %}
 </div>
   
  
