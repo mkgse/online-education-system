@@ -1,0 +1,1 @@
+web: gunicorn samarth_education_system.wsgi

@@ -4,11 +4,13 @@
 
 {% block content %}
 
-<div class="container shadow mt-4 p-5" style="max-width: 700px; background: #fff; border-radius: 10px;">
-    <h3 class="text-dark text-center mb-4">Feedback</h3>
-
+<div class="container d-flex justify-content-center align-items-center mt-5" style="min-height: 90vh;">
+   
+   
     <div class="row justify-content-center">
-        <form action="" method="POST" class="col-12">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-10 shadow p-4 rounded bg-white">
+         <h3 class="text-dark text-center mt-4">Feedback</h3>
+        <form action="" method="POST" class="">
             {% csrf_token %}
             
             <div class="row g-3">
@@ -31,7 +33,7 @@
         </form>
     </div>
 </div>
-
+</div>
 {% if messages %}
     {% for message in messages %}
         <script>alert('{{ message }}')</script>
