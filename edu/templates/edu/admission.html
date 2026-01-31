@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<div class="container d-flex justify-content-center align-items-center" style="min-height: 90vh;">
+<!-- <div class="container d-flex justify-content-center align-items-center" style="min-height: 90vh;">
     <div class="col-12 col-sm-8 col-md-6 col-lg-4 shadow p-4 rounded bg-white">
         
         <h3 class="text-center mb-4">Login</h3>
@@ -36,5 +36,62 @@
             {% endfor %}
         {% endif %}
     </div>
-</div>
+</div> -->
+
+
+<section class="section-content padding-y">
+  <div class="card mx-auto" style="max-width: 500px; margin-top: 40px; margin-bottom: 40px;">
+    <article class="card-body">
+      <header class="mb-4">
+        <h4 class="card-title text-center">Sign In</h4>
+      </header>
+
+      <form action="" method="post">
+       {% csrf_token %}
+        
+        <!-- {% for fm in form %}
+          <div class="form-group mb-3">
+              {{ fm.label_tag }}
+              {{ fm }}
+              <small class="text-danger">{{ fm.errors|striptags }}</small>
+          </div>
+        {% endfor %}  -->
+        <div class="row">
+          <div class="col-md-12 form-group">
+
+          <label>Email:</label>
+          {{form.email}}
+        </div>
+
+          <div class="col-md-12 form-group">
+
+          <label>Password:</label>
+          {{form.password}}
+           </div>
+        </div>
+       
+    
+        <br>
+        <button type="submit" class="btn btn-primary col-md-12">Sign In</button>
+
+        {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+        <p class="alert alert-danger mt-3">{{ error }}</p>
+        {% endfor %}
+        {% endif %}
+      </form>
+
+
+      {% if messages %}
+      {% for message in messages %}
+      <script>alert('{{ message }}')</script>
+      {% endfor %}
+      {% endif %}
+      <div class="text-center">
+        <a href="{% url 'signup' %}" style="text-decoration: none;">Create New Account Here</a>
+      </div>
+  </div>
+  </div>
+  </article>
+</section>
 {% endblock content %}

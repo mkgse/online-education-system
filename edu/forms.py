@@ -2,32 +2,40 @@ from dataclasses import fields
 from pyexpat import model
 from django import forms
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,UsernameField,PasswordChangeForm  
-from django.contrib.auth.models import User
 from django.utils.translation import gettext, gettext_lazy as _ 
-from .models import Addmissionform,Payment,Admission_Status,Feedback
+from .models import Addmissionform,Payment,Admission_Status,Feedback,CourseDisplay
 from datetime import datetime,date
+from account.models import User
+
+
+#Cousre Form
+
+class CourseDisplayForm(forms.ModelForm):
+     class Meta:
+          model = CourseDisplay
+          fields = ['image','title','description','what_you_will_learn','course_price','course_duration','course_type']
+          widgets = {
+               'image': forms.ClearableFileInput(attrs={
+                'class': 'form-control',
+                'accept': 'image/*'
+            }),
+            'title':forms.TextInput(attrs={'class':'form-control'}),
+            'description':forms.Textarea(attrs={'class':'form-control'}),
+            'what_you_will_learn':forms.Textarea(attrs={'class':'form-control'}),
+            'course_price':forms.TextInput(attrs={'class':'form-control'}),
+            'course_duration':forms.TextInput(attrs={'class':'form-control'}),
+            'course_type': forms.Select(attrs={'class': 'form-select'}),
+
+          }
+
 
 
 GENDER_CHOICES=[
      ('Male','Male'),
      ('Female','Female')
 ]
-class SignUpForm(UserCreationForm):
-    password1 = forms.CharField(label='Password',widget=forms.PasswordInput(attrs={'class':'form-control'}))
-    password2 = forms.CharField(label='Confirm Password',widget=forms.PasswordInput(attrs={'class':'form-control'}))
-    class Meta:
-        model = User
-        fields = ['username','first_name','last_name','email']
-        labels = {'first_name':'First Name','last_name':'Last Name' , 'email':'Email'}
-        widgets = {'username':forms.TextInput(attrs={'class':'form-control'}),
-        'username':forms.TextInput(attrs={'class':'form-control'}),
-        'first_name':forms.TextInput(attrs={'class':'form-control'}),
-        'last_name':forms.TextInput(attrs={'class':'form-control'}),
-        'email':forms.EmailInput(attrs={'class':'form-control'})
-        }
-class LoginForm(AuthenticationForm):
-     username = UsernameField(widget=forms.TextInput(attrs={'class':'form-control'}))
-     password = forms.CharField(label=_("Password"), strip=False, widget=forms.PasswordInput(attrs={'class':'form-control'}))
+
+        
 class ChangeForm(PasswordChangeForm):
      old_password = forms.CharField(label=_("Old Password"), strip=False, widget=forms.PasswordInput(attrs={'class':'form-control'}))
      new_password1 = forms.CharField(label=_("New Password"), strip=False, widget=forms.PasswordInput(attrs={'class':'form-control'}))
@@ -51,7 +59,7 @@ class AdmDetails(forms.ModelForm):
         'lastname':forms.TextInput(attrs={'class':'form-control'}),
         'fathername':forms.TextInput(attrs={'class':'form-control'}),
         'mothername':forms.TextInput(attrs={'class':'form-control',}),
-        'dob':forms.DateInput(attrs={'class':'form-control','id':'txtDate','placeholder': 'MM/DD/YYYY'}),
+        'dob': forms.DateInput(attrs={'class': 'form-control', 'id': 'datepicker', 'type': 'date'}),
         'mobile':forms.TextInput(attrs={'class':'form-control'}),
         'email':forms.EmailInput(attrs={'class':'form-control'}),
         'address':forms.TextInput(attrs={'class':'form-control'}),
@@ -70,6 +78,8 @@ class AdmDetails(forms.ModelForm):
         'roll_number':forms.TextInput(attrs={'class':'form-control'}),
         'roll_number1':forms.TextInput(attrs={'class':'form-control'}),
         'roll_number2':forms.TextInput(attrs={'class':'form-control'}),
+        'photo': forms.FileInput(),
+        'signature': forms.FileInput(),
         'course_applied_for':forms.Select(attrs={'class':'form-select'}),
         }
         
@@ -94,9 +104,11 @@ class AdmissionDetails(forms.ModelForm):
 class AddAdmissionStatus(AdmissionDetails):
       class Meta:
           model = Admission_Status
-          fields = ['user', 'reg_amount', 'admission_status']
+          fields = '__all__'
+          exclude = ['status_date']
           widgets = {
             'admission_status': forms.Select(attrs={'class': 'form-select'}),
+            'admission_date': forms.Select(attrs={'class':'form-select'}),
             'user': forms.Select(attrs={'class': 'form-select'}),
             'reg_amount': forms.Select(attrs={'class': 'form-select'}),
         }
@@ -111,5 +123,5 @@ class FeedbackForm(forms.ModelForm):
           labels = {'name':'Name','email':'Email','message':'Message'}
           widgets = {'name':forms.TextInput(attrs={'class':'form-control'}),
                 'email':forms.TextInput(attrs={'class':'form-control'}),
-                'message': forms.Textarea(attrs={'class':'form-control','style':'width=100px','placeholder':'Type Here Some else here..'}),
+                'message': forms.Textarea(attrs={'class':'form-control','style':'width=50px;height=80px','placeholder':'Type Here Some else here..'}),
      }

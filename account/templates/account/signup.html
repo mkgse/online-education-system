@@ -1,0 +1,91 @@
+{% extends 'edu/base1.html' %}
+{% load static %}
+
+{% block content2 %}
+<section class="section-content padding-y">
+  <div class="card mx-auto" style="max-width: 520px; margin-top: 40px; margin-bottom: 40px;">
+    <article class="card-body">
+      <header class="mb-4">
+        <h4 class="card-title text-center">Sign up</h4>
+      </header>
+
+      <form action="" method="post">
+       {% csrf_token %}
+        
+        <!-- {% for fm in form %}
+          <div class="form-group mb-3">
+              {{ fm.label_tag }}
+              {{ fm }}
+              <small class="text-danger">{{ fm.errors|striptags }}</small>
+          </div>
+        {% endfor %}  -->
+
+    
+
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label>First Name:</label>
+            {{form.first_name}}
+            <small class="text-danger">{{ form.first_name.errors|striptags }}</small>
+          </div>
+          <div class="col-md-6 form-group">
+            <label>Last Name:</label>
+            {{form.last_name}}
+            <small class="text-danger">{{ form.last_name.errors|striptags }}</small>
+          </div>
+        </div>
+            <div class="col form-group">
+
+          <label>Mobile:</label>
+          {{form.phone_number}}
+          <small class="text-danger">{{ form.phone_number.errors|striptags }}</small>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="">Email:</label>
+              {{form.email}}
+              <small class="text-danger">{{ form.email.errors|striptags }}</small>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="">Password:</label>
+              {{form.password}}
+              <small class="text-danger">{{ form.password.errors|striptags }}</small>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="">Confirm Password:</label>
+              {{form.confirm_password}}
+              <small class="text-danger">{{ form.confirm_password.errors|striptags }}</small>
+            </div>
+          </div>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+
+        {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+        <p class="alert alert-danger mt-3">{{ error }}</p>
+        {% endfor %}
+        {% endif %}
+      </form>
+
+
+      {% if messages %}
+      {% for message in messages %}
+      <script>alert('{{ message }}')</script>
+      {% endfor %}
+      {% endif %}
+      <div class="text-center">
+        <a href="{% url 'admission' %}" style="text-decoration: none;">Already registered? Please login here.</a>
+      </div>
+  </div>
+  </div>
+  </article>
+</section>
+{% endblock content2 %}

@@ -13,14 +13,7 @@
             </div>  
      <input type="submit"  class="btn btn-primary mt-3 offset-5" value="Pay Now">           
  
-  </form>  
-</div> 
-        
-               
-        </div>
-    
-    </div>
-</div>
+  </form>                   
 <div class="row" mt-1 p-3>
   <div class="col-sm-4 mx-auto">
 {% if messages %}
@@ -31,7 +24,7 @@
 </div>
 </div>
 {% if payment %}
-<div class="text-center">
+<div class="text-center mt-3 col-sm-3 offset-4">
 <form action="{% url 'success' %}" method="POST">
   {% csrf_token %}
  <script src="https://checkout.razorpay.com/v1/checkout.js"
@@ -47,11 +40,15 @@
  data.prefill.email = "gaurav.kumar@example.com"
  data-prefill.contact = "9999999999"
  data-theme.color = "#3399cc"
+ data-theme.color="#F37254"
+
 
  ></script>
  <input type="hidden" custom = "Hidden Element" name="hidden" class="alert alert-success">
 
 </form>
+</div> 
+</div>
 {% endif %}
 {% endblock content %}
 

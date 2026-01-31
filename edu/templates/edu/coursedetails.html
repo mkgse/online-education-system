@@ -1,0 +1,48 @@
+{% extends 'edu/base1.html '%}
+{% load static %}
+
+{% block content3 %}
+
+<div class="container print-container" style="width: 100vw; padding: 20px; margin:100px 0px 60px 0px; border-radius:10px;">
+
+    <div class="row">
+
+        <!-- LEFT SIDE (8 columns) -->
+        <div class="col-8">
+            <div class="card p-3 mb-3" style="white-space: pre-line; font-size: 17px; line-height: 1.7;">
+                <h2>Overview:</h2>
+                <p>{{course_details.description}}</p>
+            </div>
+
+            <div class="card p-3" style="white-space: pre-line; font-size: 17px; line-height: 1.7;">
+                <h3>What You'll Learn:</h3>
+                {{course_details.what_you_will_learn|safe}}
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE (4 columns) -->
+        <div class="col-4">
+            <div class="card p-3">
+              <div class="card-body">
+              <img src="{{course_details.image.url}}" alt="" width="350px">
+                <h3 class="fw-bold mt-2">Rs.{{course_details.course_price }}</h3>
+                <br>
+                 <a href="{% url 'admission' %}" class="btn btn-primary col-sm-4">Buy Now</a>
+                 <br><br>
+                <h4>Samarth Education Center</h4>
+                <p>Course Duration   : {{course_details.course_duration}}</p>
+                 <p>Published     : {{course_details.created_at}}</p>
+                <p>Last Updated    : {{course_details.updated_at}}</p>
+                <p>Category     : {{course_details.course_type |upper }}</p>
+              </div>
+              </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock content3 %}
+
+{% block jscontent %}
+{% endblock jscontent %}

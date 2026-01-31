@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.shortcuts import render, redirect, get_object_or_404
 import razorpay
-from django.contrib import messages
+from django.contrib import messages,auth
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
@@ -10,18 +10,46 @@ from .forms import (
     SignUpForm, LoginForm, ChangeForm, AdmDetails,
     PaymentDetails, FeedbackForm
 )
-from .models import Payment, Addmissionform, Admission_Status, Feedback
+from .models import Payment, Addmissionform, Admission_Status, Feedback,CourseDisplay
 
 import razorpay
 from datetime import date, datetime
 
 
+
 # ------------------- HOME -------------------
 def Home(request):
     if not request.user.is_authenticated:
-        return render(request, 'edu/Index.html')
+           sort_by = request.GET.get('sort','all')
+           if sort_by == 'premium':
+              courses = CourseDisplay.objects.filter(course_type = 'premium')
+           elif sort_by == 'sort_term':
+                courses = CourseDisplay.objects.filter(course_type = 'sort_term')
+           elif sort_by == 'professional':
+                courses = CourseDisplay.objects.filter(course_type = 'professional')
+           elif sort_by == 'free':
+                courses = CourseDisplay.objects.filter(course_type = 'free')
+           else:
+                 courses = CourseDisplay.objects.all()
+           return render(request, 'edu/Index.html',{'course_details':courses})
     user = request.user
-    return render(request, 'edu/Index.html', {'full_name': user.get_full_name()})
+    sort_by = request.GET.get('sort','all')
+    if sort_by == 'premium':
+         courses = CourseDisplay.objects.filter(course_type = 'premium')
+    elif sort_by == 'sort_term':
+         courses = CourseDisplay.objects.filter(course_type = 'sort_term')
+    elif sort_by == 'professional':
+            courses = CourseDisplay.objects.filter(course_type = 'professional')
+    elif sort_by == 'free':
+         courses = CourseDisplay.objects.filter(course_type = 'free')
+    else:
+         courses = CourseDisplay.objects.all()
+    return render(request, 'edu/Index.html', {'course_details':courses,'full_name': user.full_name()})
+
+def CourseDetail(request,id):
+    courses = get_object_or_404(CourseDisplay,id=id)
+    print(courses)
+    return render(request, 'edu/coursedetails.html',{'course_details':courses})
 
 
 def about1(request):
@@ -30,38 +58,6 @@ def about1(request):
 
 def course(request):
     return render(request, 'edu/course.html')
-
-
-# ------------------- AUTH -------------------
-def admission(request):
-    if request.user.is_authenticated:
-        return redirect('dashboard')
-
-    if request.method == "POST":
-        form = LoginForm(request=request, data=request.POST)
-        if form.is_valid():
-            uname = form.cleaned_data['username']
-            upass = form.cleaned_data['password']
-            user = authenticate(username=uname, password=upass)
-            if user:
-                login(request, user)
-                return redirect('/admissionform')
-    else:
-        form = LoginForm()
-    return render(request, 'edu/admission.html', {'form': form})
-
-
-def sign_up(request):
-    if request.method == "POST":
-        fm = SignUpForm(request.POST)
-        if fm.is_valid():
-            fm.save()
-            messages.success(request, 'Congratulations! You have successfully registered.')
-            return redirect('admission')
-    else:
-        fm = SignUpForm()
-    return render(request, 'edu/signup.html', {'form': fm})
-
 
 def user_change_pass(request):
     if not request.user.is_authenticated:
@@ -72,25 +68,32 @@ def user_change_pass(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Your password has been successfully changed!')
+            return redirect("admission")
     else:
         form = ChangeForm(user=request.user)
 
     return render(request, 'edu/changepass.html', {
         'form': form,
-        'full_name': request.user.get_full_name()
+        'full_name': request.user.full_name()
     })
 
 
 def user_logout(request):
     logout(request)
     return redirect('admission')
-
+# ----------------------------Dashboard-------------------------
+def dashboard(request):
+    return render(request,'edu/dashboard.html')
 
 # ------------------- ADMISSION FORM -------------------
 
 def admission_details(request):
     if not request.user.is_authenticated:
         return redirect('admission')
+
+    draft = Addmissionform.objects.filter(user=request.user,confirmed = False).last()
+    if draft:
+         return redirect("formpreview", pk=draft.pk)
 
     if request.method == "POST":
         details = AdmDetails(request.POST, request.FILES)
@@ -102,13 +105,13 @@ def admission_details(request):
             return redirect("formpreview", pk=obj.pk)  # pass record ID
     else:
         details = AdmDetails()
+        form = Addmissionform.objects.filter(user=request.user)
 
-    form = Addmissionform.objects.filter(user=request.user)
     return render(request, 'edu/admissionform.html', {
         'details': details,
-        'full_name': request.user.get_full_name(),
+        'full_name': request.user.full_name(),
         'user': request.user.username,
-        'form': form
+        'form':form
     })
 
 
@@ -125,8 +128,13 @@ def AdmissionPreview(request, pk):
             return redirect("payment")  # after confirm
         elif "edit" in request.POST:
             return redirect("admissiondetails")  # edit existing record
+    context = {
+        'data':obj,
+        'full_name': request.user.full_name(),
+    }
 
-    return render(request, "edu/admission_preview.html", {"data": obj})
+    return render(request, "edu/admission_preview.html",context)
+
 
 
 def AdmissionEdit(request, pk):
@@ -139,8 +147,12 @@ def AdmissionEdit(request, pk):
             return redirect("formpreview", pk=obj.pk)  # back to preview after edit
     else:
         form = AdmDetails(instance=obj)
+        context = {
+          "form": form,
+          "full_name": request.user.full_name(),
+        }
 
-    return render(request, "edu/admission_edit.html", {"form": form})
+    return render(request, "edu/admission_edit.html", context)
 
 
     
@@ -152,7 +164,7 @@ def Admission_Details(request):
 
     form = Addmissionform.objects.filter(user=request.user)
     return render(request, 'edu/preview.html', {
-        'full_name': request.user.get_full_name(),
+        'full_name': request.user.full_name(),
         'form': form
     })
 
@@ -160,7 +172,7 @@ def Admission_Details(request):
 
 def Admission_status(request):
     admstatus = Admission_Status.objects.filter(user=request.user)
-    return render(request, 'edu/admissionstatus.html', {'admstatus': admstatus,'full_name': request.user.get_full_name()})
+    return render(request, 'edu/admissionstatus.html', {'admstatus': admstatus,'full_name': request.user.full_name()})
 
 # ------------------- PAYMENT -------------------
 def payment_details(request):
@@ -178,7 +190,7 @@ def payment_details(request):
         Payment.objects.create(user=request.user, amount=amount, order_id=order['id'],paid=False)
         return render(request, 'edu/payment.html', {'payment': Payment,'order':order,})
 
-    return render(request, 'edu/payment.html',{'payment':None,'full_name': request.user.get_full_name()})
+    return render(request, 'edu/payment.html',{'payment':None,'full_name': request.user.full_name()})
 
 
 @csrf_exempt

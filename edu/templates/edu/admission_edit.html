@@ -167,12 +167,25 @@ label {
 <hr>
     <div class="col-sm-6 text-center">
         <label for="id_photo">Photo</label>
-       {{form.photo}}
+{% if form.instance.photo %}
+    <img src="{{ form.instance.photo.url }}" alt="Photo" width="120" height="140" class="mb-2"><br>
+    {{form.photo}}
+{% else %}
+    No photo uploaded
+{% endif %}
+
 
     </div>
     <div class="col-sm-6 text-center">
         <label for="id_signature">Signature</label>
-       {{form.signature}}
+{% if form.instance.signature %}
+    <img src="{{ form.instance.signature.url }}" alt="Photo" width="120" height="60" class="mb-2"><br>
+      {{form.signature}}
+{% else %}
+    No photo uploaded
+{% endif %}
+
+       
 
     </div>
 </div>
@@ -230,8 +243,7 @@ label {
       <small class="text-danger">{{st.errors|striptags}}</small>
      </div>
   {% endfor %}
- 
-   <div class="text-center mt-3">
+   <div class="text-center p-3">
       <button type="submit" class="btn btn-success">Update</button>
       <a href="{% url 'formpreview' pk=form.instance.pk %}" class="btn btn-secondary">Cancel</a>
     </div>

@@ -3,7 +3,7 @@
 
 {% block content3 %}
 
- <div class="container print-container" style="width: 100vw; padding: 20px; margin:100px 0px 60px 0px;; border-radius:10px;">
+ <div class="container print-container" style="width: 100vw; padding: 20px; margin:20px 0px 60px 0px;; border-radius:10px;">
     <h2 class="text-center">Student Admission Form</h2>
 
   
@@ -167,10 +167,15 @@
      <div>
   <form action  method="post" >
     {% csrf_token %}
-     <button type="submit" name="confirm" class="btn btn-success ">Confirm</button>
+     <button type="submit" name="confirm" class="btn btn-success "onclick="return confirmSubmit()">Final Submit</button>
      <a href="{% url 'admission_edit' pk=data.pk %}" class="btn btn-warning">Edit</a>
   </form>
   </div>
 
 </div>
+<script>
+function confirmSubmit() {
+  return confirm("Please check carefully before submitting this form.\nOtherwise you cannot edit this form later!");
+}
+</script>
 {% endblock content3 %}

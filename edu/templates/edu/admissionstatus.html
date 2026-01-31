@@ -14,7 +14,8 @@
       <tr>
         <th scope="col">User Name</th>
         <th scope="col">Registration Amount</th>
-        <th scope="col">Admission Confirm Date</th>
+        <th scope="col">Admission Date</th>
+        <th scope="col">Admission Status Update Date</th>
         <th scope="col">Admission Status</th>
       </tr>
     </thead>
@@ -22,7 +23,15 @@
       <tr>
         <td>{{st.user}}</td>
         <td>{{st.reg_amount}}</td>
-        <td>{{st.admissin_date}}</td>
+       
+        <td>
+            {% if st.admission_date %}
+                {{ st.admission_date.created_at }}
+            {% else %}
+                Not Available
+            {% endif %}
+        </td>
+        <td>{{st.status_date}}</td>
         <td>{{st.admission_status}}</td>
         </tr>
     </tbody>

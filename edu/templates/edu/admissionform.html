@@ -28,7 +28,6 @@ label {
 }
 </style>
 
-
 {% if form.exists %}
   {% for fm in form %}
     {% if fm.user == request.user %}
@@ -147,10 +146,41 @@ label {
     <h4 class="mb-0">Educational Details</h4>
     </div>
     <hr>
+    <!-- <div>Education</div>
     <div class="col-sm-3">Board <span class="text-danger ">*</span><br>{{ details.board }}<br>{{ details.board1 }}<br>{{ details.board2 }}</div>
     <div class="col-sm-3">Passing Year <span class="text-danger ">*</span><br>{{ details.passing_year }}<br>{{ details.passing_year1 }}<br>{{ details.passing_year2 }}</div>
     <div class="col-sm-3">Percentage <span class="text-danger ">*</span><br>{{ details.percentage }}<br>{{ details.percentage1 }}<br>{{ details.percentage2 }}</div>
-    <div class="col-sm-3">Roll No. <span class="text-danger ">*</span><br>{{ details.roll_number }}<br>{{ details.roll_number1 }}<br>{{ details.roll_number2 }}</div>
+    <div class="col-sm-3">Roll No. <span class="text-danger ">*</span><br>{{ details.roll_number }}<br>{{ details.roll_number1 }}<br>{{ details.roll_number2 }}</div> -->
+    <table>
+      <tr>
+        <th>Education</th>
+        <th>Board</th>
+        <th>Passing Year</th>
+        <th>Percentage</th>
+        <th>Roll No.</th>
+      </tr>
+      <tr>
+        <td>10th</td>
+        <td>{{details.board}}</td>
+        <td>{{details.passing_year}}</td>
+        <td>{{details.percentage}}</td>
+        <td>{{details.roll_number}}</td>
+      </tr>
+        <tr>
+        <td>12th</td>
+        <td>{{details.board1}}</td>
+        <td>{{details.passing_year1}}</td>
+        <td>{{details.percentage1}}</td>
+        <td>{{details.roll_number1}}</td>
+      </tr>
+        <tr>
+        <td>Graduation</td>
+        <td>{{details.board2}}</td>
+        <td>{{details.passing_year2}}</td>
+        <td>{{details.percentage2}}</td>
+        <td>{{details.roll_number2}}</td>
+      </tr>
+    </table>
   </div>
 
   <!-- DOCUMENTS -->
@@ -221,16 +251,12 @@ label {
     <div><small class="text-danger">{{field.errors }}</small></div>
   {% endfor %}
  <div class="mt-2 p-2">
-  <input type="submit" name="preview" value="Preview" onclick="return confirmSubmit()" class="btn btn-primary btn-lg col-sm-2 offset-4">
+  <input type="submit" name="preview" value="Preview"  class="btn btn-primary btn-lg col-sm-2 offset-4">
   <input type="reset" value="Reset" class="btn btn-danger btn-lg col-sm-2">
   </div>
 </form>
 
-<script>
-function confirmSubmit() {
-  return confirm("Please check carefully before submitting this form.\nOtherwise you cannot edit this form later!");
-}
-</script>
+
 
 <!-- Messages -->
 {% if messages %}

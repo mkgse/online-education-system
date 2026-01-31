@@ -32,11 +32,10 @@
 
  {% for fm in form %}
 
- {{fm.registration_number}}
-
- <div class="container print-container" style="width: 100vw; padding: 20px; margin:100px 0px 60px 0px;; border-radius:10px;">
+ <div class="container-fluid print-container" style="width: 100vw; padding: 20px; margin:10px 0px 60px 0px;; border-radius:10px;">
     <h2 class="text-center">Student Admission Form</h2>
     <h5 class="text-center">Your Registration Number is: <span class="text-primary fw-bold">{{fm.registration_number }}</span></h5>
+    <p class="text-center">Admission Date & Time: <span class="text-primary fw-bold">{{fm.created_at }}</span></p>
     <h4>Persional Details</h4> 
     <hr> 
     <table class="table table-bordered mt-1 p-3 text-center">

@@ -2,32 +2,75 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
-from edu.forms import LoginForm, AdmDetails, AdmissionDetails,AddAdmissionStatus
-from edu.models import Addmissionform, Admission_Status, Payment, Feedback
+from edu.forms import LoginForm, AdmDetails, AdmissionDetails,AddAdmissionStatus,CourseDisplayForm
+from edu.models import Addmissionform, Admission_Status, Payment, Feedback ,CourseDisplay
 from django.urls import reverse
 from django.core.paginator import Paginator
+from django.contrib import auth
+from edu.models import User
+
+
+
+# -------------------------------------Course Add------------------------------------------- #
+def course_detail(request):
+    course = CourseDisplay.objects.all()
+    paginator = Paginator(course,10)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    return render(request,'adminportal/coursedetails.html',{"course":page_obj})
+
+def update_course(request,id):
+    pi = get_object_or_404(CourseDisplay,pk=id)
+    if request.method == "POST":
+        course = CourseDisplayForm(request.POST,request.FILES,instance=pi)
+        if course.is_valid():
+            course.save()
+            messages.success(request, 'Your data has been successfully updated')
+            return redirect('course_detail')
+    else:
+        course = CourseDisplayForm(instance=pi)   
+    return render(request,'adminportal/updatecourse.html',{'course':course})
+
+def view_course(request,id):
+    form = get_object_or_404(CourseDisplay,pk=id)
+    return render(request,'adminportal/view_course.html',{'course_details':form})
+
+def add_course(request):
+    if request.method == "POST":
+        form = CourseDisplayForm(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'course created succsessfully!')
+            return redirect('course_detail')
+    else:
+        form = CourseDisplayForm()
+    return render(request,'adminportal/addcourse.html',{'form':form})
+
+def delete_course(request,id):
+    pi = get_object_or_404(CourseDisplay,pk=id)
+    pi.delete()
+    return HttpResponseRedirect(reverse('course_detail'))
+
 
 # ----------------------------Admin Login------------------------
 
 def admin_login(request):
-    if not request.user.is_authenticated:
-        if request.method == "POST":
-            form = LoginForm(request=request, data=request.POST)
-            if form.is_valid():
-                uname = form.cleaned_data['username']
-                upass = form.cleaned_data['password']
-                user = authenticate(username=uname, password=upass)
-                if user is not None and user.is_superuser:
-                    login(request, user)
-                    messages.success(request, 'Congratulations!! You have successfully logged in.')
-                    return HttpResponseRedirect('/adminn/admindashboard/')
-                else:
-                    messages.info(request, 'You are not an Admin or credentials are invalid!')
-        else:
-            form = LoginForm()
-        return render(request, 'adminportal/admin_login.html', {'form': form})
-    else:
-        return HttpResponseRedirect('/edu/dashboard')
+
+    if  request.user.is_authenticated:
+       return redirect('admindashboard')
+    form = LoginForm()
+    if request.method == "POST":
+       uname = request.POST['email']
+       upass = request.POST['password']
+       user = auth.authenticate(username=uname, password=upass)
+       if user is not None and user.is_staff:
+          login(request, user)
+          messages.success(request, 'Congratulations!! You have successfully logged in.')
+          return redirect('admindashboard')
+       else:
+             messages.info(request, 'You are not an Admin or credentials are invalid!')
+    return render(request, 'adminportal/admin_login.html', {'form': form})
+        
         
         # ---------------------------------Admission List-------------------------
 def admin_dashboard(request):

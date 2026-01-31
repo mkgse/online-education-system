@@ -2,6 +2,12 @@ from django.urls import path
 from  .import views
 
 urlpatterns = [
+      #course CRUD
+    path('course/detail/',views.course_detail,name='course_detail'),
+    path('update_course/<int:id>/',views.update_course,name='update_course'),
+    path('view_course/<int:id>/',views.view_course,name='view_course'),
+    path('add_course/',views.add_course,name='add_course'),
+    path('delete/course/<int:id>',views.delete_course,name='delete_course'),
     path('login/',views.admin_login,name='adminlogin' ),
     path('admindashboard/',views.admin_dashboard , name="admindashboard"),
     path('delete/<int:id>/',views.delete_form , name='deleteform'),

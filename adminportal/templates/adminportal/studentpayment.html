@@ -2,7 +2,6 @@
 {% load static %}
 
 
-
 {% block content %}
 
 <div class="container-fluid shadow" style="width: 100vw; padding: 20px; margin:100px 0px 60px 0px;; border-radius:10px;">
@@ -16,6 +15,7 @@
     </select>
     <noscript><input type="submit" value="Filter"></noscript>
   </form>
+
 <table class="table table-striped table-bordered table-hover align-middle">
     <thead>
       <tr>
@@ -65,7 +65,7 @@
         {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
           <li class="page-item"><a class="page-link" href="?page={{ num }}&status={{ status }}">{{ num }}</a></li>
         {% endif %}
-      {% endfor %2}
+      {% endfor %}
       {% if page_obj.has_next %}
         <li class="page-item">
           <a class="page-link" href="?page={{ page_obj.next_page_number }}&status={{ status }}">Next</a>
