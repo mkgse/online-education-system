@@ -181,4 +181,3 @@ EMAIL_HOST="Email Host"
 EMAIL_PORT = 'Your Port'
 EMAIL_HOST_USER="Your Email"
 EMAIL_HOST_PASSWORD="Your Password"
-EMAIL_USE_TLS=True
